@@ -3,220 +3,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ identity.name }} — Senior Software Engineer · AI / Agentic Systems</title>
-<meta name="description" content="{{ identity.tagline }} — {{ identity.title }}">
+<title>{{ identity.name }} · Engineering Portfolio</title>
+<meta name="description" content="{{ identity.tagline }}">
 <meta property="og:title" content="{{ identity.name }} — Senior Software Engineer">
 <meta property="og:description" content="{{ identity.tagline }}">
 <meta property="og:type" content="profile">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 
-<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<main>
 
-<header class="topnav">
-  <div class="topnav__inner">
-    <div class="topnav__brand">
-      <span class="dot dot--live"></span>
-      <span class="brand-mark">MB</span>
-      <span class="brand-status">Available · Q3 2026</span>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="masthead">
+      <span class="masthead-mark">MATHEUS BINICHESKI</span>
+      <span class="masthead-sub">Engineering Portfolio · Édition 2026</span>
     </div>
-    <nav class="topnav__links">
-      <a href="#work">Work</a>
-      <a href="#experience">Experience</a>
-      <a href="#stack">Stack</a>
-      <a href="#contact" class="cta-link">Contact ↗</a>
-    </nav>
-  </div>
-</header>
-
-<!-- ────────────  HERO  ──────────── -->
-<section class="hero">
-  <div class="hero__inner">
-    <div class="hero__meta">
-      <span class="pill">{{ identity.location }}</span>
-      <span class="pill pill--accent">Open to remote contract / EOR</span>
-    </div>
-    <h1 class="hero__title">
-      <span class="hero__title-name">{{ identity.name }}</span>
-      <span class="hero__title-role">Senior Software Engineer<br>building <span class="accent">production AI systems</span></span>
-    </h1>
-    <p class="hero__tag">{{ identity.tagline }}</p>
-    <div class="hero__actions">
-      <a href="{{ resume_pdf }}" class="btn btn--primary" download>
-        <span>Download résumé</span>
-        <span class="btn__arrow">↓</span>
-      </a>
-      <a href="#work" class="btn btn--ghost">
-        <span>See selected work</span>
-        <span class="btn__arrow">→</span>
-      </a>
-    </div>
-    <div class="hero__ticker">
-      <span class="ticker-label">Stack today</span>
-      <span class="ticker-divider">/</span>
-      <span class="ticker-item">Python · FastAPI</span>
-      <span class="ticker-divider">/</span>
-      <span class="ticker-item">Node.js · TypeScript</span>
-      <span class="ticker-divider">/</span>
-      <span class="ticker-item">PostgreSQL · PgCat</span>
-      <span class="ticker-divider">/</span>
-      <span class="ticker-item">Anthropic Claude · Claude Code</span>
-      <span class="ticker-divider">/</span>
-      <span class="ticker-item">Docker · AWS · Railway</span>
+    <div class="live">
+      <span>Status <strong>Available · Q3 2026</strong></span>
+      <span>Tz <strong>UTC-3</strong></span>
+      <a href="{{ resume_pdf }}" class="btn-cta" download>Résumé ↓</a>
     </div>
   </div>
-</section>
 
-<!-- ────────────  KPIs  ──────────── -->
-<section class="kpis">
-  <div class="kpis__inner">
-    <h2 class="section-eyebrow">Outcomes shipped</h2>
-    <div class="kpis__grid">
-      {% for k in kpis %}
-      <div class="kpi-card">
-        <div class="kpi-card__metric">
-          <span class="kpi-card__num">{{ k.metric }}</span>
-          <span class="kpi-card__unit">{{ k.unit }}</span>
-        </div>
-        <div class="kpi-card__label">{{ k.label }}</div>
-        <div class="kpi-card__detail">{{ k.detail }}</div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
+  <!-- HERO -->
+  <section class="hero">
 
-<!-- ────────────  WORK  ──────────── -->
-<section class="work" id="work">
-  <div class="work__inner">
-    <h2 class="section-eyebrow">Selected work</h2>
-    <h3 class="section-title">Production systems with measurable outcomes</h3>
+    <div class="hero-left fadein">
+      <div class="hero-tag">Senior Engineer · 10+ years · open to remote contract</div>
 
-    <div class="work__grid">
-      {% for w in selected_work %}
-      <article class="work-card">
-        <div class="work-card__head">
-          <div class="work-card__year">{{ w.year }}</div>
-          <h4 class="work-card__title">{{ w.title }}</h4>
-          <div class="work-card__client">{{ w.client }}</div>
-        </div>
-        <p class="work-card__summary">{{ w.summary }}</p>
-        <div class="work-card__metric">
-          <span class="metric-label">Outcome</span>
-          <span class="metric-value">{{ w.metric }}</span>
-        </div>
-        <div class="work-card__stack">
-          {% for s in w.stack %}<span class="tag">{{ s }}</span>{% endfor %}
-        </div>
-        {% if w.link %}
-        <a href="{{ w.link }}" target="_blank" rel="noopener" class="work-card__link">
-          Read the code &nbsp;↗
-        </a>
-        {% endif %}
-      </article>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- ────────────  EXPERIENCE TIMELINE  ──────────── -->
-<section class="experience" id="experience">
-  <div class="experience__inner">
-    <h2 class="section-eyebrow">Career</h2>
-    <h3 class="section-title">10+ years across software, infra, and AI</h3>
-    <ol class="timeline">
-      {% for e in experience %}
-      <li class="timeline__item{% if e.current %} timeline__item--current{% endif %}">
-        <div class="timeline__marker"></div>
-        <div class="timeline__head">
-          <div class="timeline__period">{{ e.period }}</div>
-          <h4 class="timeline__role">{{ e.role }}</h4>
-          <div class="timeline__company">{{ e.company }}</div>
-        </div>
-        <p class="timeline__summary">{{ e.summary }}</p>
-        <div class="timeline__stack">
-          {% for s in e.stack %}<span class="tag tag--sm">{{ s }}</span>{% endfor %}
-        </div>
-      </li>
-      {% endfor %}
-    </ol>
-  </div>
-</section>
-
-<!-- ────────────  STACK  ──────────── -->
-<section class="stack" id="stack">
-  <div class="stack__inner">
-    <h2 class="section-eyebrow">Stack</h2>
-    <h3 class="section-title">What I work in daily</h3>
-    <div class="stack__grid">
-      {% for g in stack_groups %}
-      <div class="stack-group">
-        <div class="stack-group__label">{{ g.label }}</div>
-        <div class="stack-group__items">
-          {% for it in g.items_list %}<span class="chip">{{ it }}</span>{% endfor %}
+      <div class="hero-id">
+        <div class="hero-mark">MB</div>
+        <div class="hero-id-info">
+          <h2>{{ identity.name }}</h2>
+          <div class="meta">{{ identity.location }}</div>
         </div>
       </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
 
-<!-- ────────────  CREDENTIALS  ──────────── -->
-<section class="credentials">
-  <div class="credentials__inner">
-    <h2 class="section-eyebrow">Credentials</h2>
-    <ul class="credentials__list">
+      <div class="hero-pin-block">
+        <div class="hero-pin-val"><span class="pre">USD</span><span>1.2M</span></div>
+        <div class="hero-pin-lbl">Annual operating-cost reduction shipped</div>
+      </div>
+
+      <div class="hero-meta">
+        <div>
+          <div class="hero-meta-val">360×</div>
+          <div class="hero-meta-lbl">Batch perf gain</div>
+        </div>
+        <div>
+          <div class="hero-meta-val">10+</div>
+          <div class="hero-meta-lbl">Years senior</div>
+        </div>
+        <div>
+          <div class="hero-meta-val">40%</div>
+          <div class="hero-meta-lbl">SDR cost cut · LLM</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right fadein" style="animation-delay:.1s">
+      <h1 class="hero-headline">
+        Senior software engineer<br>
+        building <span class="gold">production AI systems</span><br>
+        that ship, measure,<br>
+        and don't fall over at 3 AM.
+      </h1>
+      <p class="hero-lede">
+        I work across <strong>Python / FastAPI</strong>, <strong>Node / TypeScript</strong>,
+        <strong>PostgreSQL</strong>, and the <strong>Anthropic Claude API</strong> — daily.
+        I write evals before I write prompts. <strong>Claude Code</strong> is my IDE.
+        I have shipped paid-media attribution rebuilds, agentic SDR pipelines,
+        and infrastructure overhauls — all measured.
+      </p>
+      <div class="hero-actions">
+        <a href="{{ resume_pdf }}" class="btn-cta" download>Download résumé →</a>
+        <a href="#work" class="btn-ghost">Selected work</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- KPIS -->
+  <div class="section-title">
+    <h3>Outcomes shipped</h3>
+    <div class="sub">/ measured, in production</div>
+  </div>
+
+  <section class="kpi-grid fadein" style="animation-delay:.15s">
+    {% set palette = ['bordeaux', 'gold', 'navy', 'forest'] %}
+    {% for k in kpis %}
+    <div class="kpi {{ palette[loop.index0 % 4] }}">
+      <div class="kpi-label">{{ k.label }}</div>
+      <div class="kpi-value">
+        <span>{{ k.metric }}</span><span class="kpi-unit">{{ k.unit }}</span>
+      </div>
+      <div class="kpi-detail">{{ k.detail }}</div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <!-- WORK -->
+  <div class="section-title" id="work">
+    <h3>Selected work</h3>
+    <div class="sub">/ four production systems</div>
+  </div>
+
+  <section class="work-grid fadein" style="animation-delay:.2s">
+    {% set work_palette = ['gold', 'bordeaux', 'navy', 'forest'] %}
+    {% for w in selected_work %}
+    <article class="work-card {{ work_palette[loop.index0 % 4] }}">
+      <div class="head">
+        <h4>{{ w.title }}</h4>
+        <span class="year">{{ w.year }}</span>
+      </div>
+      <div class="client">{{ w.client }}</div>
+      <div class="summary">{{ w.summary }}</div>
+      <div class="metric">
+        <span class="label">Outcome</span>
+        <span class="value">{{ w.metric }}</span>
+      </div>
+      <div class="stack">
+        {% for s in w.stack %}<span class="tag">{{ s }}</span>{% endfor %}
+      </div>
+      {% if w.link %}
+      <a href="{{ w.link }}" target="_blank" rel="noopener" class="work-link">Read the code ↗</a>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+
+  <!-- TIMELINE -->
+  <div class="section-title" id="experience">
+    <h3>Career</h3>
+    <div class="sub">/ 10+ years · software · infra · AI</div>
+  </div>
+
+  <section class="timeline fadein" style="animation-delay:.25s">
+    {% for e in experience %}
+    {% set kls = 'current' if e.current else ('parallel' if 'parallel' in (e.period|lower) else 'past') %}
+    <div class="tl-item {{ kls }}">
+      <div class="tl-tag">
+        {% if e.current %}Current{% elif 'parallel' in (e.period|lower) %}Parallel role{% else %}Prior{% endif %}
+        <span class="period-pill">{{ e.period }}</span>
+      </div>
+      <h4 class="tl-role">{{ e.role }}</h4>
+      <div class="tl-company">{{ e.company }}</div>
+      <p class="tl-summary">{{ e.summary }}</p>
+      <div class="tl-stack">
+        {% for s in e.stack %}<span class="tag">{{ s }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <!-- STACK -->
+  <div class="section-title" id="stack">
+    <h3>Stack</h3>
+    <div class="sub">/ what I work in daily</div>
+  </div>
+
+  <section class="stack-grid fadein" style="animation-delay:.3s">
+    {% for g in stack_groups %}
+    <div class="stack-card">
+      <div class="label">{{ g.label }}</div>
+      <div class="items">
+        {% for it in g.items_list %}<span class="chip">{{ it }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <!-- CREDENTIALS -->
+  <div class="section-title">
+    <h3>Credentials</h3>
+    <div class="sub">/ formal education + certifications</div>
+  </div>
+
+  <section class="creds fadein" style="animation-delay:.35s">
+    <ul class="creds-list">
       {% for c in certifications %}
       <li>
-        <span class="cred-name">{{ c.name }}</span>
-        <span class="cred-meta">{{ c.issuer }} · {{ c.year }}</span>
+        <span class="name">{{ c.name }}</span>
+        <span class="meta">{{ c.issuer }} · {{ c.year }}</span>
       </li>
       {% endfor %}
     </ul>
-  </div>
-</section>
+  </section>
 
-<!-- ────────────  CONTACT  ──────────── -->
-<section class="contact" id="contact">
-  <div class="contact__inner">
-    <h2 class="section-eyebrow">Let's talk</h2>
-    <h3 class="section-title">I respond within 2 hours during US Eastern business hours</h3>
-    <div class="contact__grid">
-      <a href="mailto:{{ identity.email }}" class="contact-card">
-        <div class="contact-card__label">Email</div>
-        <div class="contact-card__value">{{ identity.email }}</div>
-      </a>
-      <a href="{{ identity.linkedin }}" target="_blank" rel="noopener" class="contact-card">
-        <div class="contact-card__label">LinkedIn</div>
-        <div class="contact-card__value">/in/matheus-binicheski-81354ba8</div>
-      </a>
-      <a href="{{ identity.github }}" target="_blank" rel="noopener" class="contact-card">
-        <div class="contact-card__label">GitHub</div>
-        <div class="contact-card__value">/MatheusBinicheski</div>
-      </a>
-      <a href="{{ resume_pdf }}" class="contact-card contact-card--cta" download>
-        <div class="contact-card__label">Résumé</div>
-        <div class="contact-card__value">Download PDF ↓</div>
-      </a>
-    </div>
+  <!-- CONTACT -->
+  <div class="section-title" id="contact">
+    <h3>Let's talk</h3>
+    <div class="sub">/ reply within 2h · US Eastern hours</div>
   </div>
-</section>
 
-<footer class="foot">
-  <div class="foot__inner">
-    <span>{{ identity.name }} — engineering portfolio</span>
-    <span class="foot__divider">·</span>
-    <span>Brasília · UTC-3</span>
-    <span class="foot__divider">·</span>
-    <a href="{{ case_studies_link }}" target="_blank" rel="noopener">Source on GitHub ↗</a>
+  <section class="contact-grid fadein" style="animation-delay:.4s">
+    <a href="mailto:{{ identity.email }}" class="contact-card">
+      <div class="label">Email</div>
+      <div class="value">{{ identity.email }}</div>
+    </a>
+    <a href="{{ identity.linkedin }}" target="_blank" rel="noopener" class="contact-card">
+      <div class="label">LinkedIn</div>
+      <div class="value">/in/matheus-binicheski-81354ba8</div>
+    </a>
+    <a href="{{ identity.github }}" target="_blank" rel="noopener" class="contact-card">
+      <div class="label">GitHub</div>
+      <div class="value">/MatheusBinicheski</div>
+    </a>
+    <a href="{{ resume_pdf }}" class="contact-card cta" download>
+      <div class="label">Résumé</div>
+      <div class="value">Download PDF ↓</div>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span><strong>{{ identity.name }}</strong> · engineering portfolio</span>
+    <span>Brasília · UTC-3 · <a href="{{ case_studies_link }}" target="_blank" rel="noopener">Source ↗</a></span>
   </div>
-</footer>
 
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-<script src="/static/js/main.js"></script>
+</main>
+
 </body>
 </html>
