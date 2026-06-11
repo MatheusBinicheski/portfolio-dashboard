@@ -68,21 +68,18 @@
 
     <div class="hero-right fadein" style="animation-delay:.1s">
       <h1 class="hero-headline">
-        Engenheiro de software sênior<br>
-        construindo <span class="gold">sistemas de IA em produção</span><br>
-        que entregam, são medidos<br>
+        Sistemas de <span class="gold">IA em produção</span><br>
+        que entregam,<br>
+        são medidos,<br>
         e não caem às 3 da manhã.
       </h1>
       <p class="hero-lede">
-        Trabalho com <strong>Python / FastAPI</strong>, <strong>Node / TypeScript</strong>,
-        <strong>PostgreSQL</strong> e a <strong>API Anthropic Claude</strong> todos os dias.
-        Escrevo evals antes de escrever prompt. O <strong>Claude Code</strong> é meu IDE.
-        Entreguei reescrita de atribuição de mídia paga, pipelines agentivos de SDR
-        e overhauls de infraestrutura — sempre medido.
+        <strong>Python · FastAPI · Postgres · Claude API</strong> no dia a dia.
+        Evals antes de prompt. Claude Code como IDE.
       </p>
       <div class="hero-actions">
         <a href="{{ resume_pdf }}" class="btn-cta" download>Baixar currículo →</a>
-        <a href="#work" class="btn-ghost">Trabalhos selecionados</a>
+        <a href="#work" class="btn-ghost">Ver projetos</a>
       </div>
     </div>
 
@@ -117,25 +114,30 @@
     {% set work_palette = ['gold', 'bordeaux', 'navy', 'forest'] %}
     {% for w in selected_work %}
     <article class="work-card {{ work_palette[loop.index0 % 4] }}">
-      <div class="head">
-        <h4>{{ w.title }}</h4>
-        <span class="year">{{ w.year }}</span>
-      </div>
-      <div class="client">{{ w.client }}</div>
-
       {% if w.screenshot %}
       <div class="shot">
         <img src="{{ w.screenshot }}" alt="{{ w.title }}" loading="lazy">
-        <span class="shot-tag">Anonimizado · NDA</span>
+        <span class="shot-tag">NDA · Anonimizado</span>
         {% if w.screenshot_caption %}
         <div class="shot-caption">{{ w.screenshot_caption }}</div>
         {% endif %}
       </div>
       {% endif %}
 
-      <div class="summary">{{ w.summary }}</div>
+      <div class="head">
+        <h4>{{ w.title }}</h4>
+        <span class="year">{{ w.year }}</span>
+      </div>
+      <div class="client">{{ w.client }}</div>
+
+      {% if w.highlights %}
+      <ul class="highlights">
+        {% for h in w.highlights %}<li>{{ h }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+
       <div class="metric">
-        <span class="label">Resultado</span>
+        <span class="label">→ Resultado</span>
         <span class="value">{{ w.metric }}</span>
       </div>
       <div class="stack">

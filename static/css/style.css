@@ -469,18 +469,58 @@ a { color: inherit; text-decoration: none; }
 }
 
 .work-card .shot {
-  margin: 0 -32px 22px;
-  border-top: 1px solid var(--line);
+  margin: -32px -32px 24px;
   border-bottom: 1px solid var(--line);
   background: var(--paper-2);
   position: relative;
   overflow: hidden;
+  aspect-ratio: 16 / 11;
 }
+
+.work-card .highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.work-card .highlights li {
+  font-family: 'Inter', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+  padding: 9px 14px 9px 32px;
+  background: var(--paper-2);
+  border-left: 3px solid var(--gold);
+  position: relative;
+  font-weight: 500;
+}
+
+.work-card .highlights li::before {
+  content: "✓";
+  position: absolute;
+  left: 12px;
+  top: 9px;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.work-card.bordeaux .highlights li { border-left-color: var(--bordeaux); }
+.work-card.bordeaux .highlights li::before { color: var(--bordeaux); }
+.work-card.navy .highlights li { border-left-color: var(--navy); }
+.work-card.navy .highlights li::before { color: var(--navy); }
+.work-card.forest .highlights li { border-left-color: var(--forest); }
+.work-card.forest .highlights li::before { color: var(--forest); }
 
 .work-card .shot img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
   filter: saturate(0.92) contrast(1.02);
   transition: filter .25s ease, transform .35s ease;
 }
