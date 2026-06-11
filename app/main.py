@@ -13,6 +13,7 @@ from fastapi.templating import Jinja2Templates
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from app import data as _data
+from app import data_pt as _data_pt
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -35,12 +36,36 @@ def fresh_data():
     return _data
 
 
+def fresh_data_pt():
+    importlib.reload(_data_pt)
+    return _data_pt
+
+
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
     d = fresh_data()
     return TEMPLATES.TemplateResponse(
         request=request,
         name="index.html",
+        context={
+            "identity": d.IDENTITY,
+            "kpis": d.KPIS,
+            "selected_work": d.SELECTED_WORK,
+            "experience": d.EXPERIENCE_TIMELINE,
+            "stack_groups": d.STACK_GROUPS,
+            "certifications": d.CERTIFICATIONS,
+            "resume_pdf": d.RESUME_PDF_RELATIVE,
+            "case_studies_link": d.CASE_STUDIES_LINK,
+        },
+    )
+
+
+@app.get("/pt", response_class=HTMLResponse)
+def home_pt(request: Request):
+    d = fresh_data_pt()
+    return TEMPLATES.TemplateResponse(
+        request=request,
+        name="index_pt.html",
         context={
             "identity": d.IDENTITY,
             "kpis": d.KPIS,

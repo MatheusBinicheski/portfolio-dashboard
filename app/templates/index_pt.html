@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ identity.name }} · Portfólio de Engenharia</title>
+<meta name="description" content="{{ identity.tagline }}">
+<meta property="og:title" content="{{ identity.name }} — Engenheiro de Software Sênior">
+<meta property="og:description" content="{{ identity.tagline }}">
+<meta property="og:type" content="profile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<main>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="masthead">
+      <span class="masthead-mark">MATHEUS BINICHESKI</span>
+      <span class="masthead-sub">Portfólio de Engenharia · Edição 2026 · PT-BR</span>
+    </div>
+    <div class="live">
+      <span>Status <strong>Disponível · Q3 2026</strong></span>
+      <span>Fuso <strong>UTC-3</strong></span>
+      <a href="/" class="btn-ghost" style="margin-right:8px">EN ↗</a>
+      <a href="{{ resume_pdf }}" class="btn-cta" download>Currículo ↓</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="hero-left fadein">
+      <div class="hero-tag">Engenheiro Sênior · 10+ anos · aberto a contrato remoto</div>
+
+      <div class="hero-id">
+        <div class="hero-mark">MB</div>
+        <div class="hero-id-info">
+          <h2>{{ identity.name }}</h2>
+          <div class="meta">{{ identity.location }}</div>
+        </div>
+      </div>
+
+      <div class="hero-pin-block">
+        <div class="hero-pin-val"><span class="pre">US$</span><span>1,2M</span></div>
+        <div class="hero-pin-lbl">Redução anual de custo operacional entregue</div>
+      </div>
+
+      <div class="hero-meta">
+        <div>
+          <div class="hero-meta-val">360×</div>
+          <div class="hero-meta-lbl">Ganho de performance em batch</div>
+        </div>
+        <div>
+          <div class="hero-meta-val">10+</div>
+          <div class="hero-meta-lbl">Anos como sênior</div>
+        </div>
+        <div>
+          <div class="hero-meta-val">40%</div>
+          <div class="hero-meta-lbl">Custo SDR cortado · LLM</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right fadein" style="animation-delay:.1s">
+      <h1 class="hero-headline">
+        Engenheiro de software sênior<br>
+        construindo <span class="gold">sistemas de IA em produção</span><br>
+        que entregam, são medidos<br>
+        e não caem às 3 da manhã.
+      </h1>
+      <p class="hero-lede">
+        Trabalho com <strong>Python / FastAPI</strong>, <strong>Node / TypeScript</strong>,
+        <strong>PostgreSQL</strong> e a <strong>API Anthropic Claude</strong> todos os dias.
+        Escrevo evals antes de escrever prompt. O <strong>Claude Code</strong> é meu IDE.
+        Entreguei reescrita de atribuição de mídia paga, pipelines agentivos de SDR
+        e overhauls de infraestrutura — sempre medido.
+      </p>
+      <div class="hero-actions">
+        <a href="{{ resume_pdf }}" class="btn-cta" download>Baixar currículo →</a>
+        <a href="#work" class="btn-ghost">Trabalhos selecionados</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- KPIS -->
+  <div class="section-title">
+    <h3>Resultados entregues</h3>
+    <div class="sub">/ medidos, em produção</div>
+  </div>
+
+  <section class="kpi-grid fadein" style="animation-delay:.15s">
+    {% set palette = ['bordeaux', 'gold', 'navy', 'forest'] %}
+    {% for k in kpis %}
+    <div class="kpi {{ palette[loop.index0 % 4] }}">
+      <div class="kpi-label">{{ k.label }}</div>
+      <div class="kpi-value">
+        <span>{{ k.metric }}</span><span class="kpi-unit">{{ k.unit }}</span>
+      </div>
+      <div class="kpi-detail">{{ k.detail }}</div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <!-- WORK -->
+  <div class="section-title" id="work">
+    <h3>Trabalhos selecionados</h3>
+    <div class="sub">/ sistemas em produção · clientes anonimizados por NDA</div>
+  </div>
+
+  <section class="work-grid fadein" style="animation-delay:.2s">
+    {% set work_palette = ['gold', 'bordeaux', 'navy', 'forest'] %}
+    {% for w in selected_work %}
+    <article class="work-card {{ work_palette[loop.index0 % 4] }}">
+      <div class="head">
+        <h4>{{ w.title }}</h4>
+        <span class="year">{{ w.year }}</span>
+      </div>
+      <div class="client">{{ w.client }}</div>
+
+      {% if w.screenshot %}
+      <div class="shot">
+        <img src="{{ w.screenshot }}" alt="{{ w.title }}" loading="lazy">
+        <span class="shot-tag">Anonimizado · NDA</span>
+        {% if w.screenshot_caption %}
+        <div class="shot-caption">{{ w.screenshot_caption }}</div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <div class="summary">{{ w.summary }}</div>
+      <div class="metric">
+        <span class="label">Resultado</span>
+        <span class="value">{{ w.metric }}</span>
+      </div>
+      <div class="stack">
+        {% for s in w.stack %}<span class="tag">{{ s }}</span>{% endfor %}
+      </div>
+      {% if w.link %}
+      <a href="{{ w.link }}" target="_blank" rel="noopener" class="work-link">Ver o código ↗</a>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+
+  <!-- TIMELINE -->
+  <div class="section-title" id="experience">
+    <h3>Carreira</h3>
+    <div class="sub">/ 10+ anos · software · infra · IA</div>
+  </div>
+
+  <section class="timeline fadein" style="animation-delay:.25s">
+    {% for e in experience %}
+    {% set kls = 'current' if e.current else ('parallel' if 'paralelo' in (e.period|lower) else 'past') %}
+    <div class="tl-item {{ kls }}">
+      <div class="tl-tag">
+        {% if e.current %}Atual{% elif 'paralelo' in (e.period|lower) %}Função paralela{% else %}Anterior{% endif %}
+        <span class="period-pill">{{ e.period }}</span>
+      </div>
+      <h4 class="tl-role">{{ e.role }}</h4>
+      <div class="tl-company">{{ e.company }}</div>
+      <p class="tl-summary">{{ e.summary }}</p>
+      <div class="tl-stack">
+        {% for s in e.stack %}<span class="tag">{{ s }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <!-- STACK -->
+  <div class="section-title" id="stack">
+    <h3>Stack</h3>
+    <div class="sub">/ o que uso no dia a dia</div>
+  </div>
+
+  <section class="stack-grid fadein" style="animation-delay:.3s">
+    {% for g in stack_groups %}
+    <div class="stack-card">
+      <div class="label">{{ g.label }}</div>
+      <div class="items">
+        {% for it in g.items_list %}<span class="chip">{{ it }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <!-- CREDENTIALS -->
+  <div class="section-title">
+    <h3>Credenciais</h3>
+    <div class="sub">/ formação + certificações</div>
+  </div>
+
+  <section class="creds fadein" style="animation-delay:.35s">
+    <ul class="creds-list">
+      {% for c in certifications %}
+      <li>
+        <span class="name">{{ c.name }}</span>
+        <span class="meta">{{ c.issuer }} · {{ c.year }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <!-- CONTACT -->
+  <div class="section-title" id="contact">
+    <h3>Vamos conversar</h3>
+    <div class="sub">/ resposta em até 2h · horário comercial EUA Eastern</div>
+  </div>
+
+  <section class="contact-grid fadein" style="animation-delay:.4s">
+    <a href="mailto:{{ identity.email }}" class="contact-card">
+      <div class="label">E-mail</div>
+      <div class="value">{{ identity.email }}</div>
+    </a>
+    <a href="{{ identity.linkedin }}" target="_blank" rel="noopener" class="contact-card">
+      <div class="label">LinkedIn</div>
+      <div class="value">/in/matheus-binicheski-81354ba8</div>
+    </a>
+    <a href="{{ identity.github }}" target="_blank" rel="noopener" class="contact-card">
+      <div class="label">GitHub</div>
+      <div class="value">/MatheusBinicheski</div>
+    </a>
+    <a href="{{ resume_pdf }}" class="contact-card cta" download>
+      <div class="label">Currículo</div>
+      <div class="value">Baixar PDF ↓</div>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span><strong>{{ identity.name }}</strong> · portfólio de engenharia · PT-BR</span>
+    <span>Brasília · UTC-3 · <a href="{{ case_studies_link }}" target="_blank" rel="noopener">Código-fonte ↗</a></span>
+  </div>
+
+</main>
+
+</body>
+</html>
